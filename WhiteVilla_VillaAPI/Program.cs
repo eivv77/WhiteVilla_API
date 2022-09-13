@@ -1,5 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using Serilog;
-
+using WhiteVilla_VillaAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog();*/
 
+builder.Services.AddDbContext<ApplicationDbContext>(option =>                     //добавление апликейшне стринг в дб
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection")); 
+});
 builder.Services.AddControllers(option =>
 {
     //option.ReturnHttpNotAcceptable = true; //для работы с json, *закоментить если работаем со свагером
