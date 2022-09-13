@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using WhiteVilla_VillaAPI.Data;
+using WhiteVilla_VillaAPI.Logging;
 using WhiteVilla_VillaAPI.Models;
 using WhiteVilla_VillaAPI.Models.DTO;
 
@@ -18,6 +19,13 @@ namespace WhiteVilla_VillaAPI.Controllers
             _logger = logger;
         }*/
 
+        private readonly ILogging _logger;
+
+        public VillaAPIController(ILogging logger) 
+        {
+            _logger = logger;
+        }
+
 
 
 
@@ -26,6 +34,7 @@ namespace WhiteVilla_VillaAPI.Controllers
         public ActionResult<IEnumerable<VillaDTO>> GetVillas()
         {
             //_logger.LogInformation("Getting All Villas");
+            _logger.Log("Getting All Villas", "");
             return Ok(VillaStore.villaList);
         }
 
@@ -41,6 +50,7 @@ namespace WhiteVilla_VillaAPI.Controllers
             if (id == 0)
             {
                 //_logger.LogError("Can not found villa with id " + id);
+                _logger.Log("Can not found villa with id " + id, "error");
                 return BadRequest();
             }
 
