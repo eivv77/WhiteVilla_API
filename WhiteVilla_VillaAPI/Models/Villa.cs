@@ -7,8 +7,8 @@ namespace WhiteVilla_VillaAPI.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int Id { get; set; } //id
+        public string Name { get; set; } //imya
         public string Details { get; set; } //detali
         [Required]
         public double Rate { get; set; } //оценка
