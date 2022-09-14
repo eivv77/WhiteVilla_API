@@ -70,7 +70,7 @@ namespace WhiteVilla_VillaAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<VillaDTO> CreateVilla([FromBody] VillaDTO villaDTO)
+        public ActionResult<VillaDTO> CreateVilla([FromBody] VillaCreateDTO villaDTO)
         {
             //if (!ModelState.IsValid)
             //{
@@ -87,16 +87,15 @@ namespace WhiteVilla_VillaAPI.Controllers
             {
                 return BadRequest(villaDTO);
             }
-            if (villaDTO.Id > 0)
+            /*if (villaDTO.Id > 0)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+            }*/
 
             Villa model = new()
             {
                 Amenity = villaDTO.Amenity,
                 Details = villaDTO.Details,
-                Id = villaDTO.Id,
                 ImgUrl = villaDTO.ImgUrl,
                 Name = villaDTO.Name,
                 Occupancy = villaDTO.Occupancy,
@@ -106,7 +105,7 @@ namespace WhiteVilla_VillaAPI.Controllers
             _db.Villas.Add(model);
             _db.SaveChanges();
 
-            return CreatedAtRoute("GetVilla", new { id = villaDTO.Id }, villaDTO);
+            return CreatedAtRoute("GetVilla", new { id = model.Id }, model);
         }
 
 
@@ -135,7 +134,7 @@ namespace WhiteVilla_VillaAPI.Controllers
         [HttpPut("{id:int}", Name = "UpdateVilla")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult UpdateVilla(int id, [FromBody] VillaDTO villaDTO)
+        public IActionResult UpdateVilla(int id, [FromBody] VillaUpdateDTO villaDTO)
         {
             if (villaDTO == null || id != villaDTO.Id)
             {
@@ -160,7 +159,7 @@ namespace WhiteVilla_VillaAPI.Controllers
             };
             _db.Villas.Update(model);
             _db.SaveChanges();
-
+            
             return NoContent();
         }
 
@@ -169,7 +168,7 @@ namespace WhiteVilla_VillaAPI.Controllers
         [HttpPatch("{id:int}", Name = "UpdatePartialVilla")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult UpdatePartialVilla(int id, JsonPatchDocument<VillaDTO> patchDTO)
+        public IActionResult UpdatePartialVilla(int id, JsonPatchDocument<VillaUpdateDTO> patchDTO)
         {
             if (patchDTO == null || id == 0)
             {
@@ -177,7 +176,7 @@ namespace WhiteVilla_VillaAPI.Controllers
             }
             var villa = _db.Villas.AsNoTracking().FirstOrDefault(u => u.Id == id);
 
-            VillaDTO villaDTO = new()
+            VillaUpdateDTO villaDTO = new()
             {
                 Amenity = villa.Amenity,
                 Details = villa.Details,
