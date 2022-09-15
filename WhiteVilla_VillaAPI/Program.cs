@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using WhiteVilla_VillaAPI;
 using WhiteVilla_VillaAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>                   
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection")); 
 });
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddControllers(option =>
 {
     //option.ReturnHttpNotAcceptable = true; //для работы с json, *закоментить если работаем со свагером
