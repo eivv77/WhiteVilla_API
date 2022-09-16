@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using WhiteVilla_VillaAPI;
 using WhiteVilla_VillaAPI.Data;
+using WhiteVilla_VillaAPI.Repository;
+using WhiteVilla_VillaAPI.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>                   
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection")); 
 });
+builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddControllers(option =>
 {
