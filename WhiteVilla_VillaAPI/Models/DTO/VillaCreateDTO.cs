@@ -21,7 +21,8 @@ namespace WhiteVilla_VillaAPI.Models.DTO
 
 
 
-        //public DateTime CreatedTime { get; set; } =DateTime.UtcNow;
+        //public DateTime CreatedTime { get; set; } =DateTime.UtcNow; 
+        //test
 
     }
 }
