@@ -39,8 +39,6 @@ namespace WhiteVilla_VillaAPI.Controllers
 
             IEnumerable<Villa> villaList = await _dbVilla.GetAllAsync();
             return Ok(_mapper.Map<List<VillaDTO>>(villaList));
-
-            //return Ok(await _db.Villas.ToListAsync()); без AutoMappera
         }
 
 
