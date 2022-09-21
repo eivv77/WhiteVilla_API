@@ -114,7 +114,7 @@ namespace WhiteVilla_VillaAPI.Controllers
                 Villa villa = _mapper.Map<Villa>(createDTO);
 
                 await _dbVilla.CreateAsync(villa);
-                _response.Result = _mapper.Map<VillaNumber>(villa);
+                _response.Result = _mapper.Map<VillaDTO>(villa);
                 _response.StatusCode = HttpStatusCode.Created;
                 return CreatedAtRoute("GetVilla", new { id = villa.Id }, _response);
             }
