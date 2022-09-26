@@ -12,12 +12,12 @@ namespace WhiteVilla_VillaAPI.Repository
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _db;
-        private string secretKey;
+        private string _secretKey;
 
         public UserRepository(ApplicationDbContext db, IConfiguration configuration)
         {
             _db = db;
-            secretKey = configuration.GetValue<string>("ApiSettings:Secret");
+            _secretKey = configuration.GetValue<string>("ApiSettings:Secret");
         }
 
         public bool IsUniqueUser(string username)
@@ -45,7 +45,7 @@ namespace WhiteVilla_VillaAPI.Repository
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(secretKey);
+            var key = Encoding.ASCII.GetBytes(_secretKey);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
