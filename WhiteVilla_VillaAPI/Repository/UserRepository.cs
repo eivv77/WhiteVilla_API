@@ -12,19 +12,19 @@ namespace WhiteVilla_VillaAPI.Repository
     public class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _db;
-        private string _secretKey;
+        private string secretKey;
 
         public UserRepository(ApplicationDbContext db, IConfiguration configuration)
         {
             _db = db;
-            _secretKey = configuration.GetValue<string>("ApiSettings:Secret");
+            secretKey = configuration.GetValue<string>("ApiSettings:Secret");
         }
 
         public bool IsUniqueUser(string username)
         {
-            var dbLocalUser = _db.LocalUsers;
+            var dbLU = _db.LocalUsers;
 
-            var user = dbLocalUser.FirstOrDefault(x => x.UserName == username);
+            var user = dbLU.FirstOrDefault(x => x.UserName == username);
             if (user == null)
             {
                 return true;
@@ -34,18 +34,23 @@ namespace WhiteVilla_VillaAPI.Repository
 
         public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO)
         {
-            var dbLocalUser = _db.LocalUsers;
+            var dbLU = _db.LocalUsers;
 
-            var user = dbLocalUser.FirstOrDefault(u => u.UserName.ToLower() == loginRequestDTO.UserName.ToLower()
-            && u.Password == loginRequestDTO.Password);
+            var user = dbLU.FirstOrDefault(u => u.UserName.ToLower() == loginRequestDTO.UserName.ToLower()
+                                            && u.Password == loginRequestDTO.Password);
 
             if (user == null)
             {
-                return null;
+                return new LoginResponseDTO()
+                {
+                    Token = "",
+                    User = null
+                };
             }
 
+            //if user found we generate JWT token
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_secretKey);
+            var key = Encoding.ASCII.GetBytes(secretKey);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -72,7 +77,7 @@ namespace WhiteVilla_VillaAPI.Repository
 
         public async Task<LocalUser> Register(RegistrationRequestDTO registrationRequestDTO)
         {
-            var dbLocalUser = _db.LocalUsers;
+            var dbLU = _db.LocalUsers;
 
             LocalUser user = new()
             {
@@ -82,8 +87,8 @@ namespace WhiteVilla_VillaAPI.Repository
                 Role = registrationRequestDTO.Role
             };
 
-            dbLocalUser.Add(user);
-            _db.SaveChanges();
+            dbLU.Add(user);
+            await _db.SaveChangesAsync();
 
             user.Password = "";
             return user;
