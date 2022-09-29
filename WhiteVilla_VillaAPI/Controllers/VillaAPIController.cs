@@ -36,8 +36,8 @@ namespace WhiteVilla_VillaAPI.Controllers
         }*/
 
         [HttpGet]
-        //
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<APIResponse>> GetVillas()
@@ -60,10 +60,9 @@ namespace WhiteVilla_VillaAPI.Controllers
 
 
         [HttpGet("{id:int}", Name = "GetVilla")]
-        //
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<APIResponse>> GetVillaById(int id)
@@ -85,6 +84,8 @@ namespace WhiteVilla_VillaAPI.Controllers
                     return NotFound(_response);
                 }
 
+
+
                 _response.Result = _mapper.Map<VillaDTO>(villa);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);
@@ -100,9 +101,10 @@ namespace WhiteVilla_VillaAPI.Controllers
 
 
         [HttpPost]
-        //[Authorize(Roles ="admin")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<APIResponse>> CreateVilla([FromBody] VillaCreateDTO createDTO)
         {
@@ -137,7 +139,7 @@ namespace WhiteVilla_VillaAPI.Controllers
 
 
         [HttpDelete("{id:int}", Name = "DeleteVilla")]
-        [Authorize(Roles = "CUSTOM")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -174,6 +176,7 @@ namespace WhiteVilla_VillaAPI.Controllers
 
 
         [HttpPut("{id:int}", Name = "UpdateVilla")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<APIResponse>> UpdateVilla(int id, [FromBody] VillaUpdateDTO updateDTO)

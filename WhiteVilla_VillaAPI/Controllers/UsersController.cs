@@ -21,12 +21,12 @@ namespace WhiteVilla_VillaAPI.Controllers
             this._response = new();
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
         {
             var loginResponse = await _userRepo.Login(model);
 
-            if (loginResponse == null || string.IsNullOrEmpty(loginResponse.Token))
+            if (loginResponse.User == null || string.IsNullOrEmpty(loginResponse.Token))
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 _response.IsSuccess = false;
@@ -42,7 +42,7 @@ namespace WhiteVilla_VillaAPI.Controllers
             return Ok(_response);
         }
         
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDTO model)
         {
             bool ifUserNameIsUnique = _userRepo.IsUniqueUser(model.UserName);

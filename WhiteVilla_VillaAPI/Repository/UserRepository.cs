@@ -1,6 +1,8 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using WhiteVilla_VillaAPI.Data;
 using WhiteVilla_VillaAPI.Models;
@@ -60,9 +62,8 @@ namespace WhiteVilla_VillaAPI.Repository
                     new Claim(ClaimTypes.Role, user.Role)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                //Expiration = DateTime.UtcNow.AddDays(7)
-                SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
+                SigningCredentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+        };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
