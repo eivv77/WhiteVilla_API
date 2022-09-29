@@ -12,8 +12,8 @@ using WhiteVilla_VillaAPI.Data;
 namespace WhiteVilla_VillaAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220921081909_AddForeignKeyToVillaTable")]
-    partial class AddForeignKeyToVillaTable
+    [Migration("20220929085329_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,35 @@ namespace WhiteVilla_VillaAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("WhiteVilla_VillaAPI.Models.LocalUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LocalUsers");
+                });
 
             modelBuilder.Entity("WhiteVilla_VillaAPI.Models.Villa", b =>
                 {
@@ -72,7 +101,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 1,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 21, 12, 19, 9, 46, DateTimeKind.Local).AddTicks(327),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5304),
                             Details = "The First villa in our project",
                             ImgUrl = "",
                             Name = "First",
@@ -85,7 +114,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 2,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 21, 12, 19, 9, 46, DateTimeKind.Local).AddTicks(339),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5314),
                             Details = "The Second villa in our project",
                             ImgUrl = "",
                             Name = "Second",
@@ -98,7 +127,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 3,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 21, 12, 19, 9, 46, DateTimeKind.Local).AddTicks(341),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5316),
                             Details = "The Third villa in our project",
                             ImgUrl = "",
                             Name = "Third",
@@ -111,7 +140,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 4,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 21, 12, 19, 9, 46, DateTimeKind.Local).AddTicks(342),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5317),
                             Details = "The Fourth villa in our project",
                             ImgUrl = "",
                             Name = "Fourth",
@@ -124,7 +153,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 5,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 21, 12, 19, 9, 46, DateTimeKind.Local).AddTicks(344),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5319),
                             Details = "The Fifth villa in our project",
                             ImgUrl = "",
                             Name = "Fifth",

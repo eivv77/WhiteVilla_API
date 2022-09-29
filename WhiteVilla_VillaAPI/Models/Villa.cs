@@ -5,6 +5,7 @@ namespace WhiteVilla_VillaAPI.Models
 {
     public class Villa
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; } //id

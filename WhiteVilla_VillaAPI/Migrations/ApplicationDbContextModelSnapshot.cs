@@ -99,7 +99,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 1,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 25, 0, 49, 56, 32, DateTimeKind.Local).AddTicks(8860),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5304),
                             Details = "The First villa in our project",
                             ImgUrl = "",
                             Name = "First",
@@ -112,7 +112,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 2,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 25, 0, 49, 56, 32, DateTimeKind.Local).AddTicks(8871),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5314),
                             Details = "The Second villa in our project",
                             ImgUrl = "",
                             Name = "Second",
@@ -125,7 +125,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 3,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 25, 0, 49, 56, 32, DateTimeKind.Local).AddTicks(8872),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5316),
                             Details = "The Third villa in our project",
                             ImgUrl = "",
                             Name = "Third",
@@ -138,7 +138,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 4,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 25, 0, 49, 56, 32, DateTimeKind.Local).AddTicks(8874),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5317),
                             Details = "The Fourth villa in our project",
                             ImgUrl = "",
                             Name = "Fourth",
@@ -151,7 +151,7 @@ namespace WhiteVilla_VillaAPI.Migrations
                         {
                             Id = 5,
                             Amenity = "The best",
-                            CreatedDate = new DateTime(2022, 9, 25, 0, 49, 56, 32, DateTimeKind.Local).AddTicks(8875),
+                            CreatedDate = new DateTime(2022, 9, 29, 12, 53, 29, 408, DateTimeKind.Local).AddTicks(5319),
                             Details = "The Fifth villa in our project",
                             ImgUrl = "",
                             Name = "Fifth",

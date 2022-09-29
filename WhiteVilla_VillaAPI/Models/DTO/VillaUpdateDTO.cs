@@ -4,6 +4,7 @@ namespace WhiteVilla_VillaAPI.Models.DTO
 {
     public class VillaUpdateDTO
     {
+
         [Required]
         public int Id { get; set; }
         [Required]

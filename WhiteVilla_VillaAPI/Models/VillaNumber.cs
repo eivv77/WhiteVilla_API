@@ -11,7 +11,6 @@ namespace WhiteVilla_VillaAPI.Models
         [ForeignKey("Villa")]
         public int VillaID { get; set; }
         public Villa Villa { get; set; }
-
         public string SpecialDetails { get; set; }
         public DateTime CreatedTime { get; set; } = DateTime.Now;
         public DateTime UpdatedTime { get; set; } = DateTime.Now;
