@@ -38,7 +38,7 @@ namespace WhiteVilla_VillaAPI.Controllers
                 IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync(includeProperties: "Villa");
                 _response.Result = _mapper.Map<List<VillaNumberDTO>>(villaNumberList);
                 _response.StatusCode = HttpStatusCode.OK;
-                return Ok(_response);
+                return Ok(_response); 
             }
             catch (Exception ex)
             {
