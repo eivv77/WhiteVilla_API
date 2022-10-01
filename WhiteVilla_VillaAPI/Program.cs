@@ -66,7 +66,7 @@ builder.Services.AddSwaggerGen(options => {
         "Example: \"Bearer 12345abcdef\"",
         Name = "Authorization",
         In = ParameterLocation.Header,
-        Scheme = "Bearer"
+        Scheme = "Bearer" 
     });
     options.AddSecurityRequirement(new OpenApiSecurityRequirement()
     {
